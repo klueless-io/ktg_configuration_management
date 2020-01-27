@@ -1,4 +1,6 @@
-require "ktg_configuration_management/version"
+# frozen_string_literal: true
+
+require 'ktg_configuration_management/version'
 
 module KtgConfigurationManagement
   class Error < StandardError; end
