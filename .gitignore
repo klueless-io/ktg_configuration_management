@@ -30,6 +30,9 @@ ktg_configuration_management.yml
 *.a
 mkmf.log
 
+# Environment File
+.env
+
 # Gems should not use a Gemfile.lock
 Gemfile.lock
 

@@ -5,7 +5,7 @@ guard :bundler, cmd: 'bundle install' do
   watch('ktg_configuration_management.gemspec')
 end
 
-guard :rspec, cmd: 'bundle exec rspec -f doc' do
+guard :rspec, cmd: 'bundle exec rspec -f doc --tag=focus' do
   require 'guard/rspec/dsl'
   dsl = Guard::RSpec::Dsl.new(self)
 
@@ -18,6 +18,7 @@ guard :rspec, cmd: 'bundle exec rspec -f doc' do
   # Ruby files
   ruby = dsl.ruby
   dsl.watch_spec_files_for(ruby.lib_files)
-  watch(%r{^lib/ktg_configuration_management/(.+)\.rb$}) { |m| "spec/unit/#{m[1]}_spec.rb" }
-  watch(%r{^lib/ktg_configuration_management/commands/(.+)\.rb$}) { |m| "spec/unit/commands/#{m[1]}_spec.rb" }
+  watch(%r{^lib/ktg_configuration_management/(.+)/(.+)\.rb$}) { |m| "spec/#{m[1]}/#{m[2]}_spec.rb" }
+  # watch(%r{^lib/ktg_configuration_management/(.+)\.rb$}) { |m| "spec/unit/#{m[1]}_spec.rb" }
+  # watch(%r{^lib/ktg_configuration_management/commands/(.+)\.rb$}) { |m| "spec/unit/commands/#{m[1]}_spec.rb" }
 end
