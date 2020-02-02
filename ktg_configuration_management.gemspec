@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
   spec.extensions    = ['ext/ktg_configuration_management/extconf.rb']
 
   # spec.add_dependency 'tty-box',         '~> 0.5.0'
+  spec.add_dependency 'dotenv'
 end
