@@ -4,16 +4,14 @@ require 'pry'
 require 'bundler/setup'
 require 'ktg_configuration_management'
 
-# require 'ktg_configuration_management/document_usecase/ktg_documentor'
-# require 'ktg_configuration_management/document_usecase/ktg_document'
-# require 'ktg_configuration_management/document_usecase/ktg_outcome'
-
 Dir.chdir('lib') do
-  Dir["ktg_configuration_management/document_usecase/*.rb"].each {|file| require file }
+  Dir['ktg_configuration_management/document_usecase/*.rb'].sort.each { |file| require file }
+end
+Dir.chdir('lib') do
+  Dir['ktg_configuration_management/k_usecases/*.rb'].sort.each { |file| require file }
 end
 
 RSpec.configure do |config|
-
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
   config.filter_run_when_matching :focus
@@ -25,14 +23,46 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  # ----------------------------------------------------------------------
+  # Usecase Documentator
+  # ----------------------------------------------------------------------
+
+  config.alias_example_group_to :usecase, usecase: true
+
   config.extend KtgConfigurationManagement::DocumentUsecase
   # config.include KtgConfigurationManagement::DocumentUsecase
+  config.before(:context, :usecases) do
+    # puts self.class.children
+    # puts self.class.children.first.children
+    # puts self.class.descendants
+    # puts self.class.descendants.first.metadata
+    # puts self.class.filtered_examples
+    # puts self.class.parent_groups
+
+    @usecases = KtgConfigurationManagement::Usecases.new(self.class)
+    @usecases.debug
+  end
 
   # Know thy Gem documentor
-  config.before(:all, :ktg) do |example_group|
-    @documentor = KtgConfigurationManagement::DocumentUsecase::KtgDocumentor.new 
+  config.before(:all, :ktg) do
+    @documentor = KtgConfigurationManagement::DocumentUsecase::KtgDocumentor.new
+
+    # The following are all accessible from here
+    #
+    # self.class.children
+    # self.class.children.first.children
+    # self.class.descendants
+    # self.class.descendants.first.metadata
+    # self.class.filtered_examples
+    # self.class.parent_groups
+    #
+    # See more: https://github.com/rspec/rspec-core/blob/master/lib/rspec/core/example_group.rb#L450
   end
-  config.after(:all, :ktg, :print) do |example_group|
+
+  config.after(:context) do
+  end
+
+  config.after(:all, :ktg, :print) do
     @documentor.print
   end
 
@@ -42,10 +72,10 @@ RSpec.configure do |config|
     document = @documentor.get_document(example)
 
     if document
-      document.set_description(example)
-      document.set_sample(example)
+      document.build_usage_description(example)
+      document.build_usage(example)
       document.add_outcome(example)
-      document.set_source(example)
+      document.add_content(example)
     end
   end
 end

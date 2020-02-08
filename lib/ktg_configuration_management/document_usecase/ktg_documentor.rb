@@ -1,19 +1,19 @@
+# frozen_string_literal: true
 
 module KtgConfigurationManagement
   module DocumentUsecase
+    # Documentor
     class KtgDocumentor
       attr_reader :documents
 
       # puts self.class.top_level_description
       # puts self.class.description
       # puts RSpec.current_example.description
-      # # puts self.class.name
+      # puts self.class.name
       # puts "#{self.class.top_level_description} #{self.class.description} #{RSpec.current_example.description}"
       # puts RSpec.current_example.metadata[:example_group][:parent_example_group][:parent_example_group]
-      # # puts self.title
-      # puts 'GO RICKY GOT RICK'
+      # puts self.title
       # puts example.description
-      # puts example
 
       def initialize
         @documents = []
@@ -23,8 +23,8 @@ module KtgConfigurationManagement
         key = build_key(example)
 
         return nil if key == ''
-        
-        document = get_document_by_key(key) 
+
+        document = get_document_by_key(key)
         if document.nil?
           document = KtgDocument.new(key)
           @documents << document

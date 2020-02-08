@@ -1,6 +1,8 @@
+# frozen_string_literal: true
 
 module KtgConfigurationManagement
   module DocumentUsecase
+    # Outcome
     class KtgOutcome
       attr_reader :description
       attr_reader :extra
@@ -17,30 +19,9 @@ module KtgConfigurationManagement
       end
 
       def print
-        puts "  #{self.description}"
-        extra.split("\n").each { |line| puts "    #{line.strip}"} if self.extra
-        # if self.sample
-        #   puts
-        #   puts "    #{self.sample}"
-        # end
+        puts "  #{description}"
+        extra&.split("\n")&.each { |line| puts "    #{line.strip}" }
       end
-
-      # def set_sample(example)
-      #   @sample = example.metadata[:sample] if example.metadata[:sample]
-      # end
-
-      # def set_description(example)
-      #   return unless self.description == '' 
-
-      #   example.example_group.parent_groups.reverse.each do |group|
-      #     if @description.length == 0
-      #       @description = group.description
-      #     else
-      #       @description = "#{@description} #{group.description}" 
-      #     end
-      #   end
-
-      # end
     end
   end
 end
