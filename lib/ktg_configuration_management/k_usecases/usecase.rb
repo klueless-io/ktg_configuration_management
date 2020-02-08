@@ -2,9 +2,9 @@
 # frozen_string_literal: true
 
 module KtgConfigurationManagement
-  module DocumentUsecase
+  module KUsecases
     # KTG Document
-    class KtgDocument
+    class Usecase
       attr_reader :key
       attr_reader :description
       attr_reader :usage
@@ -76,4 +76,7 @@ module KtgConfigurationManagement
       end
     end
   end
+
+  include KtgConfigurationManagement::KUsecases
+
 end
