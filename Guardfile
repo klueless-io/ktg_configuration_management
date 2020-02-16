@@ -5,7 +5,7 @@ guard :bundler, cmd: 'bundle install' do
   watch('ktg_configuration_management.gemspec')
 end
 
-guard :rspec, cmd: 'bundle exec rspec -f doc --tag=focus' do
+guard :rspec, cmd: 'bundle exec rspec -f doc' do  #--tag=focus
   require 'guard/rspec/dsl'
   dsl = Guard::RSpec::Dsl.new(self)
 

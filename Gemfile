@@ -6,6 +6,8 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
+  gem "k_usecases", path: "~/dev/gems/k_usecases"
+
   gem 'guard-bundler'
   gem 'guard-rspec'
   # pry on steroids
