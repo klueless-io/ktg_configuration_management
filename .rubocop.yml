@@ -2,7 +2,7 @@ AllCops:
   DisplayCopNames: true
   ExtraDetails: true
   Exclude:
-    - "spec/regex/literal_spec.rb"
+    - "spec/regex/*"
 
 Metrics/BlockLength:
   Exclude:
