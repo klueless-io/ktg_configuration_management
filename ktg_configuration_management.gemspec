@@ -37,4 +37,6 @@ Gem::Specification.new do |spec|
 
   # spec.add_dependency 'tty-box',         '~> 0.5.0'
   spec.add_dependency 'dotenv'
+
+  spec.add_dependency 'faraday'
 end
