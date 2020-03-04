@@ -69,8 +69,8 @@ RSpec.describe '',
         expect(scan[1][1].to_s).to eq('Don\'t you think "Karin" is still awesome.')
       end
 
-      fit { expect(scan[0][1].to_s).to eq('Don\'t you think "Karin" is awesome.') }
-      fit { expect(scan[1][1].to_s).to eq('Don\'t you think "Karin" is still awesome.')}
+      it { expect(scan[0][1].to_s).to eq('Don\'t you think "Karin" is awesome.') }
+      it { expect(scan[1][1].to_s).to eq('Don\'t you think "Karin" is still awesome.')}
     end
 
     context 'match double quote text' do

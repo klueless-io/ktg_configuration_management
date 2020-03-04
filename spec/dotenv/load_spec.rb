@@ -4,11 +4,11 @@ require 'dotenv'
 
 RSpec.describe Dotenv,
                :usecases,
-               :jsonX,
+               :json,
                :debugX,
-               :markdownX,
+               :markdown,
                :markdown_prettier,
-               :markdown_open,
+               :markdown_openX,
                markdown_file: 'docs/dotenv/load.md',
                document_title: 'Load environment variables from `.env`',
                document_description: 'Samples and use cases for working with `dotenv` gem via the load method' do
@@ -25,8 +25,9 @@ RSpec.describe Dotenv,
             title: 'Load from default .env file',
             usage: "#{described_class.name}.load",
             usage_description: 'Default.load will load application configuration from your `.env` file found in the project root' do
-      ruby 'returns a hash with environment values'  do # , block_id: 1,
-        # code: uc_block_content(1, File.read('spec/dotenv/load_spec.rb'), 'returns a hash with environment values')
+      ruby 'returns a hash with environment values'  do
+        Dotenv.load
+
         is_expected.to eq('DOTENV' => 'true')
       end
     end
